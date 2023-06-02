@@ -1,0 +1,15 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageModal" data-border="none"
+        data-outline="none">
+    <img src="{{ product.image.url }}" class="rounded mx-auto d-block" style="height: 500px; weight: 500px"
+         alt="{{ product.slug }}">
+</button>
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.slug }}">
+            </div>
+        </div>
+    </div>
+</div>
