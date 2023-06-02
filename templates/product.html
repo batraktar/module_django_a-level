@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex align-items-start mb-3" style="margin-top: 15px; margin-left: 45px;">
+    {% include 'modal_view_product_image.html' %}
+    <div class="card-body" style="margin-left: 45px;">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text">Price: {{ product.price }}$</p>
+        <p class="card-text"><small class="text-body-secondary">Amount: {{ product.quantity }} </small></p>
+    </div>
+    <div class="card-body">
+        {% if request.user.is_superuser %}
+        <a href={% url "update" product.slug %} class="btn btn-outline-secondary">Update</a>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'buy_product' product.slug %}">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-primary">Buy</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+<div class="card-body">
+    <a href={% url "base" %} class="btn btn-danger">Back</a>
+</div>
+{% endblock %}

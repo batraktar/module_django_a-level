@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Returns:</h1>
+<br>
+{% for return in return_list %}
+<div class="form-control form-control-lg">
+    Name: {{ return.purchase.product.name }} User: {{ return.purchase.user }}
+    Amount: {{ return.purchase.prodquan }}
+
+    <form name="return-form" method="post" action="{% url 'accept_return' return.purchase.id %}">
+        {% csrf_token %}
+
+        <input type="hidden" name="accept" value="{{ return.id }}">
+        <button class="btn btn-danger" type="submit">Accept</button>
+    </form>
+    <br>
+    <form name="return-form" method="post" action="{% url 'cancel_return' return.purchase.id %}">
+        {% csrf_token %}
+
+        <input type="hidden" name="accept" value="{{ return.id }}">
+        <button class="btn btn-danger" type="submit">Cancel</button>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}
